@@ -2,4 +2,4 @@
 
 https://kaylapark99.github.io/look-into-my-mind/
 
-An interactive digital art project where users can take a look into my mind.
+A minimal creation using Javascript to make an interactive view into my mind. Adobe Photoshop created graphics. 
