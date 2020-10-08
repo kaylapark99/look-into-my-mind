@@ -146,3 +146,27 @@ body {
 #text-14 {
     left: 2vw;
 }
+
+.img-container {
+    height: 60vh;
+    width: 100%;
+    position: relative;
+    top: 5vh;
+}
+
+.img-container img {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#table {
+    z-index: 1;
+    border: 6px solid black;
+}
+
+#computer {
+    z-index: 2;
+}
+
+
