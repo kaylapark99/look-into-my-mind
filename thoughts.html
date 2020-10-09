@@ -11,14 +11,27 @@
 
 	<body>
 		<div class="img-container">
-			<img src="Media/book.png">
-			<img src="Media/coffee.png">
-			<img src="Media/computer.png" id="computer">
-			<img src="Media/phone.png">
-			<img src="Media/shit.png">
+			<img src="Media/book.png" id="book" onmouseover="imgHover(0)">
+			<img src="Media/coffee.png" id="coffee" onmouseover="imgHover(1)">
+			<img src="Media/computer.png" id="computer" onmouseover="imgHover(2)">
+			<img src="Media/phone.png" id="phone" onmouseover="imgHover(3)">
+			<img src="Media/shit.png" id="shit" onmouseover="imgHover(4)">
 			<img src="Media/table.png" id="table">
+			<div class="img-container-hover">
+				<img src="Media/book-hover.png" class="hide" id="book" onmouseout="imgLeave(0)">
+				<img src="Media/coffee-hover.png" class="hide" id="coffee" onmouseout="imgLeave(1)">
+				<img src="Media/computer-hover.png" class="hide" id="computer" onmouseout="imgLeave(2)">
+				<img src="Media/phone-hover.png" class="hide" id="phone"  onmouseout="imgLeave(3)">
+				<img src="Media/shit-hover.png" class="hide" id="shit" onmouseout="imgLeave(4)"  onclick="imgClick(0)">
+			</div>
+			<div class="img-container-click">
+				<img src="Media/shit-click.png" class="hide">
+			</div>
+			<div>
+				<img src="Media/x.png" class="hide" id="x">
+			</div>
 		</div>
 
-		<script src="Tech/scripts.js"></script>
+		<script src="Tech/scriptsThoughts.js"></script>
 	</body>
 </html>

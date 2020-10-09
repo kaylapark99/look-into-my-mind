@@ -160,13 +160,56 @@ body {
     transform: translate(-50%, 0);
 }
 
+.img-container-hover img {
+    z-index: 5;
+}
+
+#book {
+   top: 30vh;
+   left: 70vw;
+   z-index: 2;
+}
+
+#coffee {
+    top: 16vh;
+    left: 30vw;
+    z-index: 3;
+}
+
+#computer {
+    left: 46vw;
+    top: 9vh;
+    z-index: 2;
+}
+
+#shit {
+    z-index: 3;
+    left: 64vw;
+    top: 32vh;
+}
+
+#phone {
+    top: 40vh; 
+    left: 30vw;
+    z-index: 3;
+}
+
 #table {
     z-index: 1;
     border: 6px solid black;
 }
 
-#computer {
-    z-index: 2;
+.img-container-click img {
+    z-index: 6;
+    margin-top: 6px;
 }
+
+#x {
+    left: 76vw;
+    top: 2vh;
+    z-index: 7;
+}
+
+
 
 

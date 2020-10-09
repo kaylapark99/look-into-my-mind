@@ -8,6 +8,7 @@ var white = document.getElementById("circle");
 var red = document.getElementById("text-6");
 var size = 0;
 var posBlack = 48;
+var deskImg = document.querySelectorAll(".img-container img");
 
 me.addEventListener("mouseover", function(){
     me.classList.add("hide")
@@ -115,6 +116,5 @@ function moveLight(e) {
 
 mouseMove.addEventListener("mousemove", moveEyes);
 text.addEventListener("mousemove", moveLight);
-
 
 
