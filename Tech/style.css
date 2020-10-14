@@ -148,7 +148,7 @@ body {
 }
 
 .img-container {
-    width: 60vw;
+    width: 55vw;
     position: relative;
     margin-top: 5vh;
     left: 50%;
@@ -166,7 +166,7 @@ body {
 
 .book {
    top: 30vh;
-   right: 70px;
+   right: 10px;
    z-index: 2;
 }
 
@@ -177,14 +177,14 @@ body {
 }
 
 .computer {
-    left: 150px;
+    left: 170px;
     top: 9vh;
     z-index: 2;
 }
 
 .shit {
     z-index: 3;
-    right: 220px;
+    right: 130px;
     top: 32vh;
 }
 
@@ -195,6 +195,7 @@ body {
 }
 
 .table {
+    width: 100%;
     z-index: 1;
     border: 6px solid black;
 }
@@ -202,11 +203,12 @@ body {
 .img-container-click img {
     z-index: 6;
     margin: 6px;
+    width: 100%;
 }
 
 #x {
     position: absolute;
-    right: 80px;
+    right: 0px;
     top: 2vh;
     z-index: 7;
     cursor: pointer;
