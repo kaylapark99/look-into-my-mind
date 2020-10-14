@@ -18,26 +18,18 @@ function imgLeave(x) {
 }
 
 function imgClick(x) {
+    var compCaptions = ["i'm currently in a zoom class", "i really should pay attention to what the prof is saying..."];
+    var shitCaptions = ["it's really not that much...", "i really gotta start studying for my midterm"];
     openTab = x;
     clickImg[x].classList.remove("hide");
     close.classList.remove("hide");
     currentCaption = captions.innerHTML;
-    if(x==0) {
-        if(compClick==0) {
-            captions.innerHTML = "i'm currently in a zoom class";
-        }
-        else if(compClick==1) {
-            captions.innerHTML = "i really should pay attention to what the prof is saying..."
-        }
+    if(x==0 & compClick < compCaptions.length) {
+        captions.innerHTML = compCaptions[compClick];
         compClick++;
     }
-    else if(x==1) {
-        if(shitClick==0) {
-            captions.innerHTML = "it's really not that much...";
-        }
-        else if(shitClick==1) {
-            captions.innerHTML = "i really gotta start studying for my midterm";
-        }   
+    else if(x==1 & shitClick < shitClick.length) {
+        captions.innerHTML = shitCaptions[shitClick];
         shitClick++;
     }
 }
@@ -45,27 +37,23 @@ function imgClick(x) {
 close.addEventListener("click", function(){
     clickImg[openTab].classList.add("hide");
     close.classList.add("hide");
-    captions.innerHTML = currentCaption;
+    resetCaption();
 });
 
 document.getElementById("coffee").addEventListener("click", function() {
     currentCaption = captions.innerHTML;
-    if(coffeeClick==0){
-        captions.innerHTML = "do you really want to do that?";
-    } 
-    else if(coffeeClick==1) {
-        captions.innerHTML = "you know caffeine will just give you anxiety";
-    }
-    else if(coffeeClick==2) {
-        captions.innerHTML = "i guess one sip won't hurt";
-        var coffeeCaptions = [""]
-        setTimeout(function(){
-
-        }, 1000);
+    var coffeeCaptions = ["do you really want to do that?","you know caffeine will just give you anxiety",
+    "i guess one sip won't hurt"];
+    if(coffeeClick < coffeeCaptions.length) {
+        captions.innerHTML = coffeeCaptions[coffeeClick];
     }
     coffeeClick++;
+    setTimeout(resetCaption, 5000);
 });
 
+function resetCaption() {
+    captions.innerHTML = currentCaption;
+}
 
 setTimeout(function(){
     changeTime.innerHTML = "it is 10:28 on a monday morning"
