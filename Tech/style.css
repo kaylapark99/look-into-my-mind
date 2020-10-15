@@ -200,7 +200,7 @@ body {
     border: 6px solid black;
 }
 
-.img-container-click img {
+.img-container-click img, #intro {
     z-index: 6;
     margin: 6px;
     width: 100%;

@@ -3,11 +3,13 @@ var clickImg = document.querySelectorAll(".img-container-click img");
 var close = document.getElementById("x");
 var captions = document.getElementById("instruction-1");
 var openTab = null;
-var currentCaption = null;
-var changeTime = document.getElementById("time");
+var currentCaption = "this is a look inside my mind";
 var coffeeClick = 0;
 var shitClick = 0;
 var compClick = 0;
+var instructionNum = 0;
+var timeSpeed = 60000;
+var time = "10:32";
 
 function imgHover(x) {
     hoverImg[x].classList.remove("hide");
@@ -23,14 +25,17 @@ function imgClick(x) {
     openTab = x;
     clickImg[x].classList.remove("hide");
     close.classList.remove("hide");
-    currentCaption = captions.innerHTML;
-    if(x==0 & compClick < compCaptions.length) {
+    if(x==0) {
         captions.innerHTML = compCaptions[compClick];
-        compClick++;
+        if(compClick < compCaptions.length-1){
+            compClick++;
+        }
     }
-    else if(x==1 & shitClick < shitClick.length) {
+    else if(x==1) {
         captions.innerHTML = shitCaptions[shitClick];
-        shitClick++;
+        if(shitClick < shitCaptions.length-1) {
+            shitClick++;
+        }
     }
 }
 
@@ -42,19 +47,52 @@ close.addEventListener("click", function(){
 
 document.getElementById("coffee").addEventListener("click", function() {
     currentCaption = captions.innerHTML;
-    var coffeeCaptions = ["do you really want to do that?","you know caffeine will just give you anxiety",
+    var coffeeCaptions = ["do i really want to do that?", "i know caffeine will just give me anxiety",
     "i guess one sip won't hurt"];
     if(coffeeClick < coffeeCaptions.length) {
         captions.innerHTML = coffeeCaptions[coffeeClick];
     }
     coffeeClick++;
-    setTimeout(resetCaption, 5000);
 });
 
 function resetCaption() {
     captions.innerHTML = currentCaption;
 }
 
-setTimeout(function(){
-    changeTime.innerHTML = "it is 10:28 on a monday morning"
-}, 60000);
+function changeInstructions() {
+    var instructions = ["i am currently in class", "it is always so hard for me to pay attention", "it's also monday, and i hate mondays", 
+    "there is just so much i have to do this week", "and i am always so tired", "maybe i should drink some coffee", "please help me"];
+    if(instructionNum < instructions.length) {
+        captions.innerHTML = instructions[instructionNum];
+        currentCaption = captions.innerHTML;
+        instructionNum++;
+    }
+    else {
+        document.getElementById("intro").classList.add("hide");
+        clearInterval(change);
+    }
+
+}
+
+var change = setInterval(changeInstructions, 2500);
+
+setInterval(function(){
+    document.getElementById("time").innerHTML = "it is " + time + " on a monday";
+    timeArray = time.split(":");
+    var hour = timeArray[0];
+    var minutes = timeArray[1];
+    if(hour == "12") {
+        hour = "1";
+    }
+    else if(minutes == "59") {
+        hour = String(parseInt(timeArray[0]) + 1);
+        minutes = "00";
+    } 
+    else if(minutes.charAt(0) == 0) {
+        minutes = "0" + String(parseInt(timeArray[1]) + 1);
+    }
+    else {
+        minutes = String(parseInt(timeArray[1]) + 1);
+    }
+    time = hour + ":" + minutes;
+}, timeSpeed);
