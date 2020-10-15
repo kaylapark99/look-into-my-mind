@@ -12,25 +12,35 @@
 	<body>
 		<div class="img-container">
 			<img src="Media/intro.png" id="intro">
-			<img src="Media/book.png" class="book" onmouseover="imgHover(0)">
-			<img src="Media/coffee.png" class="coffee" onmouseover="imgHover(1)">
-			<img src="Media/computer.png" class="computer" onmouseover="imgHover(2)">
-			<img src="Media/phone.png" class="phone" onmouseover="imgHover(3)">
-			<img src="Media/shit.png" class="shit" onmouseover="imgHover(4)">
-			<img src="Media/table.png" class="table">
+			<img src="Media/coffee.png" class="coffee initial" onmouseover="imgHover(0)">
+			<img src="Media/computer.png" class="computer initial" onmouseover="imgHover(1)">
+			<img src="Media/phone.png" class="phone initial" onmouseover="imgHover(2)">
+			<img src="Media/shit.png" class="shit initial" onmouseover="imgHover(3)">
+			<img src="Media/table.png" class="table initial">
 			<div class="img-container-hover">
-				<img src="Media/book-hover.png" class="hide book" onmouseout="imgLeave(0)">
-				<img src="Media/coffee-hover.png" class="hide coffee" id="coffee" onmouseout="imgLeave(1)">
-				<img src="Media/computer-hover.png" class="hide computer" onmouseout="imgLeave(2)" onclick="imgClick(0)">
-				<img src="Media/phone-hover.png" class="hide phone"  onmouseout="imgLeave(3)">
-				<img src="Media/shit-hover.png" class="hide shit" onmouseout="imgLeave(4)"  onclick="imgClick(1)">
+				<img src="Media/coffee-hover.png" class="hide coffee" id="coffee" onmouseout="imgLeave(0)">
+				<img src="Media/computer-hover.png" class="hide computer" onmouseout="imgLeave(1)" onclick="imgClick(0)">
+				<img src="Media/phone-hover.png" class="hide phone"  onmouseout="imgLeave(2)" onclick="imgClick(1)">
+				<img src="Media/shit-hover.png" class="hide shit" onmouseout="imgLeave(3)"  onclick="imgClick(2)">
 			</div>
 			<div class="img-container-click">
 				<img src="Media/zoom.png" class="hide">
+				<img src="Media/phone-click.png" class="hide">
 				<img src="Media/shit-click.png" class="hide">
 			</div>
 			<div>
 				<img src="Media/x.png" class="hide" id="x">
+			</div>
+			<div class="img-container-forms">
+				<div class="hide" id="phone-form">
+					<p>what should i check?</p>
+					<p class="socials">emails</p>
+					<p class="socials">texts</p>
+					<p class="socials">snapchat</p>
+				</div>
+			</div>
+			<div class="phone-options">
+				<img src="Media/phone-email.png" class="hide">
 			</div>
 		</div>
 		<div class="instructions">

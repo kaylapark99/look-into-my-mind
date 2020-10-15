@@ -30,7 +30,7 @@ body {
 }
 
 .hide {
-    visibility: hidden;
+    display: none;
 }
 
 #me, #me-hover {
@@ -160,7 +160,7 @@ body {
 }
 
 .img-container-hover img {
-    z-index: 5;
+    z-index: 10;
     cursor: pointer;
 }
 
@@ -177,14 +177,14 @@ body {
 }
 
 .computer {
-    left: 170px;
+    left: 190px;
     top: 9vh;
     z-index: 2;
 }
 
 .shit {
     z-index: 3;
-    right: 130px;
+    right: 100px;
     top: 32vh;
 }
 
@@ -201,16 +201,38 @@ body {
 }
 
 .img-container-click img, #intro {
-    z-index: 6;
+    z-index: 15;
     margin: 6px;
     width: 100%;
+}
+
+.img-container-forms div{
+    width: 100%;
+    height: 502px;
+    margin: 6px 0 0 6px;
+    color: white;
+    background-color: black;
+    text-align: center;
+    font-size: 2rem;
+    z-index: 15;
+}
+
+.img-container-forms div p {
+    position: relative;
+    top: 100px;
+}
+
+.phone-options img {
+    position: absolute;
+    top: 0;
+    border: 6px solid black;
 }
 
 #x {
     position: absolute;
     right: 0px;
     top: 2vh;
-    z-index: 7;
+    z-index: 100 !important;
     cursor: pointer;
 }
 

@@ -1,3 +1,4 @@
+var initialImg = document.querySelectorAll(".initial");
 var hoverImg = document.querySelectorAll(".img-container-hover img");
 var clickImg = document.querySelectorAll(".img-container-click img");
 var close = document.getElementById("x");
@@ -7,9 +8,11 @@ var currentCaption = "this is a look inside my mind";
 var coffeeClick = 0;
 var shitClick = 0;
 var compClick = 0;
+var phoneClick = 0;
 var instructionNum = 0;
 var timeSpeed = 60000;
 var time = "10:32";
+var imgOpen = null;
 
 function imgHover(x) {
     hoverImg[x].classList.remove("hide");
@@ -22,26 +25,70 @@ function imgLeave(x) {
 function imgClick(x) {
     var compCaptions = ["i'm currently in a zoom class", "i really should pay attention to what the prof is saying..."];
     var shitCaptions = ["it's really not that much...", "i really gotta start studying for my midterm"];
+    var phoneCaptions = ["no, i'm in class", "stop, i gotta focus", "agh, i keep getting distracted"];
     openTab = x;
-    clickImg[x].classList.remove("hide");
-    close.classList.remove("hide");
+    changeImg = false
     if(x==0) {
         captions.innerHTML = compCaptions[compClick];
         if(compClick < compCaptions.length-1){
             compClick++;
         }
+        changeImg = true;
     }
     else if(x==1) {
+        captions.innerHTML = phoneCaptions[phoneClick];
+        if(phoneClick==2) {
+            form(0);
+        }
+        if(phoneClick < phoneCaptions.length-1){
+            phoneClick++;
+        }
+    }
+    else if(x==2) {
         captions.innerHTML = shitCaptions[shitClick];
         if(shitClick < shitCaptions.length-1) {
             shitClick++;
         }
+        changeImg = true;
+    }
+    if(changeImg) {
+        clickImg[x].classList.remove("hide");
+        imgOpen = clickImg[x];
+    close.classList.remove("hide");
     }
 }
 
+function form(x) {
+    forms = document.querySelectorAll(".img-container-forms div");
+    forms[x].classList.remove("hide");
+    imgOpen = forms[x];
+    initialImg.forEach(a => a.classList.add("hide"));
+    hoverImg.forEach(a => a.classList.add("hide"));
+    processForm(forms, x);
+}
+
+function processForm(f, x) {
+    var phoneImg = document.querySelectorAll(".phone-options img");
+    var socials =  document.querySelectorAll(".socials");
+    close.classList.remove("hide");
+    socials.forEach(a => a.addEventListener('mouseover', function(){
+        a.style["cursor"] = "pointer";
+        idx = Array.prototype.indexOf.call(socials, a);
+        a.addEventListener("click", function(){
+            phoneImg[idx].classList.remove("hide");
+            imgOpen = phoneImg[idx];
+            f[x].classList.add("hide");
+        });
+    })
+);
+}
+
 close.addEventListener("click", function(){
-    clickImg[openTab].classList.add("hide");
+    imgOpen.classList.add("hide");
     close.classList.add("hide");
+    if(initialImg[0].classList.contains("hide")) {
+        initialImg.forEach(a => a.classList.remove("hide"));
+    }
     resetCaption();
 });
 
@@ -74,7 +121,7 @@ function changeInstructions() {
 
 }
 
-var change = setInterval(changeInstructions, 2500);
+var change = setInterval(changeInstructions, 500);
 
 setInterval(function(){
     document.getElementById("time").innerHTML = "it is " + time + " on a monday";
