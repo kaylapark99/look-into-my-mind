@@ -70,12 +70,14 @@ function form(x) {
 function processForm(f, x) {
     var phoneImg = document.querySelectorAll(".phone-options img");
     var socials =  document.querySelectorAll(".socials");
+    var phoneCaptions = ["i always anxiously check my emails", "572 texts...", "i don't even use snapchat, why am i checking it"];
     close.classList.remove("hide");
     socials.forEach(a => a.addEventListener('mouseover', function(){
         a.style["cursor"] = "pointer";
         idx = Array.prototype.indexOf.call(socials, a);
         a.addEventListener("click", function(){
             phoneImg[idx].classList.remove("hide");
+            captions.innerHTML = phoneCaptions[idx];
             imgOpen = phoneImg[idx];
             f[x].classList.add("hide");
         });
@@ -100,6 +102,9 @@ document.getElementById("coffee").addEventListener("click", function() {
         captions.innerHTML = coffeeCaptions[coffeeClick];
     }
     coffeeClick++;
+    if(coffeeClick==4) {
+        anxiety();
+    }
 });
 
 function resetCaption() {
@@ -119,6 +124,11 @@ function changeInstructions() {
         clearInterval(change);
     }
 
+}
+
+function anxiety() {
+    var coffeeInternval = setInterval(function(){ 
+    }, 2000);
 }
 
 var change = setInterval(changeInstructions, 500);
