@@ -5,11 +5,7 @@ var close = document.getElementById("x");
 var captions = document.getElementById("instruction-1");
 var openTab = null;
 var currentCaption = "this is a look inside my mind";
-var coffeeClick = 0;
-var shitClick = 0;
-var compClick = 0;
-var phoneClick = 0;
-var instructionNum = 0;
+var [coffeeClick, shitClick, compClick, phoneClick, anxietyCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0]; 
 var timeSpeed = 60000;
 var time = "10:32";
 var imgOpen = null;
@@ -123,12 +119,41 @@ function changeInstructions() {
         document.getElementById("intro").classList.add("hide");
         clearInterval(change);
     }
-
+}
+function anxiety() {
+    captions.innerHTML = "i'm so tired, i need more..."
+    var coffeeInterval = setInterval(function(){ 
+        var anxietyCoffeeCaptions = ["i do this every time", "coffee always my thoughts run too fast",
+        "and i can't focus", "but i always think it will help", "oh f*ck, when is my cs midterm?"];
+        if(anxietyCount < anxietyCoffeeCaptions.length) {
+            captions.innerHTML = anxietyCoffeeCaptions[anxietyCount];
+            currentCaption = captions.innerHTML;
+            anxietyCount++;
+        }
+        else {
+            clickImg[2].classList.remove("hide");
+            imgOpen = clickImg[2];
+            close.classList.remove("hide");
+            midterm();
+            clearInterval(coffeeInterval);
+        }
+    }, 1000);
+    
 }
 
-function anxiety() {
-    var coffeeInternval = setInterval(function(){ 
-    }, 2000);
+function midterm() {
+    var midtermInterval = setInterval(function(){
+        var midtermCaptions = ["i also have to find a partner for my cs project", "oh no, i forgot i have a zoom meetup for my HCI project",
+        "ah, i still haven't thought of a concept for my a3 art project"];
+        if(midtermCount < midtermCaptions.length) {
+            captions.innerHTML = midtermCaptions[midtermCount];
+            currentCaption = captions.innerHTML;
+            midtermCount++;
+        }
+        else {
+            clearInterval(midtermInterval);
+        }
+    }, 1000);
 }
 
 var change = setInterval(changeInstructions, 500);
