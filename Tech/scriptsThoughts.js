@@ -6,7 +6,6 @@ var captions = document.getElementById("instruction-1");
 var openTab = null;
 var currentCaption = "this is a look inside my mind";
 var [coffeeClick, shitClick, compClick, phoneClick, anxietyCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0]; 
-var timeSpeed = 60000;
 var time = "10:32";
 var imgOpen = null;
 
@@ -142,6 +141,8 @@ function anxiety() {
 }
 
 function midterm() {
+    clearInterval(timeInterval);
+    setInterval(changeTime, 1000);
     var midtermInterval = setInterval(function(){
         var midtermCaptions = ["i also have to find a partner for my cs project", "oh no, i forgot i have a zoom meetup for my HCI project",
         "ah, i still haven't thought of a concept for my a3 art project"];
@@ -156,9 +157,7 @@ function midterm() {
     }, 1000);
 }
 
-var change = setInterval(changeInstructions, 500);
-
-setInterval(function(){
+function changeTime() {
     document.getElementById("time").innerHTML = "it is " + time + " on a monday";
     timeArray = time.split(":");
     var hour = timeArray[0];
@@ -177,4 +176,8 @@ setInterval(function(){
         minutes = String(parseInt(timeArray[1]) + 1);
     }
     time = hour + ":" + minutes;
-}, timeSpeed);
+}
+
+var change = setInterval(changeInstructions, 500);
+
+var timeInterval = setInterval(changeTime, 60000);
