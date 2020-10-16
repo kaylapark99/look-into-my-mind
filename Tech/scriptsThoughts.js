@@ -5,7 +5,8 @@ var close = document.getElementById("x");
 var captions = document.getElementById("instruction-1");
 var openTab = null;
 var currentCaption = "this is a look inside my mind";
-var [coffeeClick, shitClick, compClick, phoneClick, anxietyCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0]; 
+var [coffeeClick, shitClick, compClick, phoneClick, postCount, 
+    anxietyCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0,0]; 
 var time = "10:32";
 var imgOpen = null;
 
@@ -142,19 +143,40 @@ function anxiety() {
 
 function midterm() {
     clearInterval(timeInterval);
-    setInterval(changeTime, 1000);
+    setInterval(changeTime, 1500);
     var midtermInterval = setInterval(function(){
         var midtermCaptions = ["i also have to find a partner for my cs project", "oh no, i forgot i have a zoom meetup for my HCI project",
         "ah, i still haven't thought of a concept for my a3 art project"];
         if(midtermCount < midtermCaptions.length) {
             captions.innerHTML = midtermCaptions[midtermCount];
-            currentCaption = captions.innerHTML;
             midtermCount++;
         }
         else {
+            clickImg[2].classList.add("hide");
+            imgOpen = clickImg[3];
+            clickImg[3].classList.remove("hide");
+            postMidterm();
             clearInterval(midtermInterval);
         }
     }, 1000);
+}
+
+function postMidterm() {
+    clearInterval(timeInterval);
+    setInterval(changeTime, 500);
+    var postInterval = setInterval(function(){
+        var postCaptions = ["what is this project even on", ""]
+        if(postCount < postCaptions.length) {
+            captions.innerHTML = postCaptions[postCount];
+            postCount++;
+        }
+        else {
+            clickImg[3].classList.add("hide");
+            imgOpen = clickImg[4];
+            clickImg[4].classList.remove("hide");
+            clearInterval(postInterval);
+        }
+    },1000);
 }
 
 function changeTime() {
@@ -168,8 +190,11 @@ function changeTime() {
     else if(minutes == "59") {
         hour = String(parseInt(timeArray[0]) + 1);
         minutes = "00";
+    }
+    else if(minutes == "09") {
+        minutes = "10"
     } 
-    else if(minutes.charAt(0) == 0) {
+    else if(minutes.charAt(0) == "0") {
         minutes = "0" + String(parseInt(timeArray[1]) + 1);
     }
     else {
