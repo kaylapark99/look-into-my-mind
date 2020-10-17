@@ -2,13 +2,16 @@ var initialImg = document.querySelectorAll(".initial");
 var hoverImg = document.querySelectorAll(".img-container-hover img");
 var clickImg = document.querySelectorAll(".img-container-click img");
 var close = document.getElementById("x");
+var phoneImg = document.querySelectorAll(".phone-options img");
 var captions = document.getElementById("instruction-1");
 var openTab = null;
 var currentCaption = "this is a look inside my mind";
 var [coffeeClick, shitClick, compClick, phoneClick, postCount, 
-    anxietyCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0,0]; 
+    anxietyCount, searchCount, focusCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0,0,0,0]; 
 var time = "10:32";
 var imgOpen = null;
+var day = "monday";
+var timeCaption = document.getElementById("time");
 
 function imgHover(x) {
     hoverImg[x].classList.remove("hide");
@@ -19,8 +22,9 @@ function imgLeave(x) {
 }
 
 function imgClick(x) {
-    var compCaptions = ["i'm currently in a zoom class", "i really should pay attention to what the prof is saying..."];
-    var shitCaptions = ["it's really not that much...", "i really gotta start studying for my midterm"];
+    var compCaptions = ["i'm currently in a zoom class", "i really should pay attention to what the prof is saying...",
+    "i have a midterm in this class soon too", "i don't even understand what is going on"];
+    var shitCaptions = ["it's really not that much...", "i really gotta start studying for my midterm", "this is so overwhelming"];
     var phoneCaptions = ["no, i'm in class", "stop, i gotta focus", "agh, i keep getting distracted"];
     openTab = x;
     changeImg = false
@@ -29,6 +33,9 @@ function imgClick(x) {
         if(compClick < compCaptions.length-1){
             compClick++;
         }
+        if(compClick == 3){
+            midterm();
+        }
         changeImg = true;
     }
     else if(x==1) {
@@ -36,7 +43,7 @@ function imgClick(x) {
         if(phoneClick==2) {
             form(0);
         }
-        if(phoneClick < phoneCaptions.length-1){
+        if(phoneClick < 2){
             phoneClick++;
         }
     }
@@ -44,6 +51,9 @@ function imgClick(x) {
         captions.innerHTML = shitCaptions[shitClick];
         if(shitClick < shitCaptions.length-1) {
             shitClick++;
+        }
+        if(shitClick == 2) {
+            midterm();
         }
         changeImg = true;
     }
@@ -64,7 +74,6 @@ function form(x) {
 }
 
 function processForm(f, x) {
-    var phoneImg = document.querySelectorAll(".phone-options img");
     var socials =  document.querySelectorAll(".socials");
     var phoneCaptions = ["i always anxiously check my emails", "572 texts...", "i don't even use snapchat, why am i checking it"];
     close.classList.remove("hide");
@@ -120,6 +129,7 @@ function changeInstructions() {
         clearInterval(change);
     }
 }
+
 function anxiety() {
     captions.innerHTML = "i'm so tired, i need more..."
     var coffeeInterval = setInterval(function(){ 
@@ -143,7 +153,7 @@ function anxiety() {
 
 function midterm() {
     clearInterval(timeInterval);
-    setInterval(changeTime, 1500);
+    timeInterval = setInterval(changeTime, 1500);
     var midtermInterval = setInterval(function(){
         var midtermCaptions = ["i also have to find a partner for my cs project", "oh no, i forgot i have a zoom meetup for my HCI project",
         "ah, i still haven't thought of a concept for my a3 art project"];
@@ -163,31 +173,91 @@ function midterm() {
 
 function postMidterm() {
     clearInterval(timeInterval);
-    setInterval(changeTime, 500);
+    timeInterval = setInterval(changeTime, 500);
     var postInterval = setInterval(function(){
-        var postCaptions = ["what is this project even on", ""]
+        var postCaptions = ["what is this project even on", "interactive? data? narratives?"]
         if(postCount < postCaptions.length) {
             captions.innerHTML = postCaptions[postCount];
             postCount++;
         }
         else {
-            clickImg[3].classList.add("hide");
+            imgOpen.classList.add("hide");
             imgOpen = clickImg[4];
             clickImg[4].classList.remove("hide");
+            searchAgain();
             clearInterval(postInterval);
         }
     },1000);
 }
 
+
+function searchAgain() {
+    var searchInterval = setInterval(function(){
+        var searchCaptions = ["what does this even mean", "wait im in class still"]
+        if(searchCount < searchCaptions.length) {
+            captions.innerHTML = searchCaptions[searchCount];
+            searchCount++;
+        }
+        else {
+            imgOpen.classList.add("hide");
+            imgOpen = clickImg[5];
+            clickImg[5].classList.remove("hide");  
+            captions.innerHTML = "AH time is going by so fast, i have so much to do";
+            focus();
+            clearInterval(searchInterval);
+        }
+    },1000);
+}
+
+function focus(){
+    initialImg.forEach(a => a.classList.add("hide"));
+    var focusInterval = setInterval(function(){
+    var focus = [clickImg[0], phoneImg[0], clickImg[3], phoneImg[2], clickImg[2], clickImg[0]];
+    var focusCaptions = ["FOCUS, god why can i never pay attention", "I CAN'T PAY ATTENTION FOR ONE SECOND",
+    "critiques are due thursday, what do i even do", "hmmm... wonder if anyone posted anything", "oh no, i haven't started studying for my midterm", "i am going to cry, just f*ucking focus"];
+    if (focusCount < focusCaptions.length) {
+        captions.innerHTML = focusCaptions[focusCount];
+        focus[focusCount].classList.remove("hide");
+        imgOpen.classList.add("hide");
+        imgOpen = focus[focusCount];
+        focusCount++;
+    }
+    else{
+        imgOpen.classList.add("hide");
+        initialImg.forEach(a => a.classList.remove("hide"));
+        clearInterval(focusInterval);
+        final();
+    }
+    },2000);
+}
+
+function final() {
+    captions.innerHTML = "too much... it's all too much";
+    currentCaption = captions.innerHTML;
+    setTimeout(function(){
+        clearInterval(timeInterval);
+        initialImg.forEach(a=>
+            a.style["filter"]="blur(10px)"
+        );
+        hoverImg.forEach(a=>
+            a.style["filter"]="blur(10px)"
+        );
+        captions.innerHTML = "";
+        currentCaption = "";
+        setTimeout(grow(true), 3000);
+    }, 5000);
+
+}   
+
 function changeTime() {
-    document.getElementById("time").innerHTML = "it is " + time + " on a monday";
+    timeCaption.innerHTML = "it is " + time + " on a " + day;
     timeArray = time.split(":");
     var hour = timeArray[0];
     var minutes = timeArray[1];
-    if(hour == "12") {
-        hour = "1";
-    }
-    else if(minutes == "59") {
+    if(minutes == "59") {
+        if(hour == "12") {
+            hour = "1";
+        }
         hour = String(parseInt(timeArray[0]) + 1);
         minutes = "00";
     }
@@ -201,6 +271,23 @@ function changeTime() {
         minutes = String(parseInt(timeArray[1]) + 1);
     }
     time = hour + ":" + minutes;
+}
+
+timeCaption.innerHTML = "it is 10:31 on a " + day;
+if(sessionStorage.getItem("dayCount") % 5 == 1) {
+    day = "monday";
+}
+else if(sessionStorage.getItem("dayCount") % 5 == 2) {
+    day = "tuesday";
+}
+else if(sessionStorage.getItem("dayCount") % 5 == 3) {
+    day = "wednesday";
+}
+else if(sessionStorage.getItem("dayCount") % 5 == 4) {
+    day = "thursday";
+}
+else if(sessionStorage.getItem("dayCount") % 5 == 0) {
+    day = "friday";
 }
 
 var change = setInterval(changeInstructions, 500);
