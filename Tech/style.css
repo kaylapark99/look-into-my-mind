@@ -202,8 +202,11 @@ body {
 
 .img-container-click img, #intro {
     z-index: 15;
-    margin: 6px;
     width: 100%;
+}
+
+#intro {
+    border: 6px solid black;
 }
 
 .img-container-forms div{
@@ -222,7 +225,7 @@ body {
     top: 100px;
 }
 
-.phone-options img {
+.phone-options img, .img-container-click img {
     position: absolute;
     top: 0;
     border: 6px solid black;

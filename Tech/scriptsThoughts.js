@@ -10,7 +10,6 @@ var [coffeeClick, shitClick, compClick, phoneClick, postCount,
     anxietyCount, searchCount, focusCount, instructionNum, midtermCount] = [0,0,0,0,0,0,0,0,0,0]; 
 var time = "10:32";
 var imgOpen = null;
-var day = "monday";
 var timeCaption = document.getElementById("time");
 
 function imgHover(x) {
@@ -30,11 +29,11 @@ function imgClick(x) {
     changeImg = false
     if(x==0) {
         captions.innerHTML = compCaptions[compClick];
-        if(compClick < compCaptions.length-1){
+        if(compClick < compCaptions.length){
+            if(compClick == 3){
+                midterm();
+            }
             compClick++;
-        }
-        if(compClick == 3){
-            midterm();
         }
         changeImg = true;
     }
@@ -49,11 +48,11 @@ function imgClick(x) {
     }
     else if(x==2) {
         captions.innerHTML = shitCaptions[shitClick];
-        if(shitClick < shitCaptions.length-1) {
+        if(shitClick < shitCaptions.length) {
+            if(shitClick == 2) {
+                midterm();
+            }
             shitClick++;
-        }
-        if(shitClick == 2) {
-            midterm();
         }
         changeImg = true;
     }
@@ -147,7 +146,7 @@ function anxiety() {
             midterm();
             clearInterval(coffeeInterval);
         }
-    }, 1000);
+    }, 2000);
     
 }
 
@@ -168,7 +167,7 @@ function midterm() {
             postMidterm();
             clearInterval(midtermInterval);
         }
-    }, 1000);
+    }, 2000);
 }
 
 function postMidterm() {
@@ -187,7 +186,7 @@ function postMidterm() {
             searchAgain();
             clearInterval(postInterval);
         }
-    },1000);
+    },2000);
 }
 
 
@@ -206,7 +205,7 @@ function searchAgain() {
             focus();
             clearInterval(searchInterval);
         }
-    },1000);
+    },2500);
 }
 
 function focus(){
@@ -225,10 +224,10 @@ function focus(){
     else{
         imgOpen.classList.add("hide");
         initialImg.forEach(a => a.classList.remove("hide"));
-        clearInterval(focusInterval);
         final();
+        clearInterval(focusInterval);
     }
-    },2000);
+    }, 2000);
 }
 
 function final() {
@@ -242,15 +241,23 @@ function final() {
         hoverImg.forEach(a=>
             a.style["filter"]="blur(10px)"
         );
-        captions.innerHTML = "";
-        currentCaption = "";
-        setTimeout(grow(true), 3000);
+        captions.innerHTML = "i get so anxious, and then immediately zone out...";
+        setTimeout(function(){
+            captions.innerHTML = "and time just stops";
+        }, 2500);
+        setTimeout(function(){
+            captions.innerHTML = "please help me";
+        }, 5000);
+        setTimeout(startGrow, 10000);
     }, 5000);
-
 }   
 
+function startGrow() {
+    grow(true)
+}
+
 function changeTime() {
-    timeCaption.innerHTML = "it is " + time + " on a " + day;
+    timeCaption.innerHTML = "it is " + time + " on a monday";
     timeArray = time.split(":");
     var hour = timeArray[0];
     var minutes = timeArray[1];
@@ -273,23 +280,6 @@ function changeTime() {
     time = hour + ":" + minutes;
 }
 
-timeCaption.innerHTML = "it is 10:31 on a " + day;
-if(sessionStorage.getItem("dayCount") % 5 == 1) {
-    day = "monday";
-}
-else if(sessionStorage.getItem("dayCount") % 5 == 2) {
-    day = "tuesday";
-}
-else if(sessionStorage.getItem("dayCount") % 5 == 3) {
-    day = "wednesday";
-}
-else if(sessionStorage.getItem("dayCount") % 5 == 4) {
-    day = "thursday";
-}
-else if(sessionStorage.getItem("dayCount") % 5 == 0) {
-    day = "friday";
-}
-
-var change = setInterval(changeInstructions, 500);
+var change = setInterval(changeInstructions, 1500);
 
 var timeInterval = setInterval(changeTime, 60000);

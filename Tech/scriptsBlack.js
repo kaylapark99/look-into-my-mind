@@ -6,7 +6,6 @@ var size = 0;
 var posBlack = 48;
 var deskImg = document.querySelectorAll(".img-container img");
 var switchScreen = false;
-sessionStorage.setItem("dayCount", "1");
 
 red.addEventListener("mouseover", function(){
     white.style.backgroundColor = "red";
@@ -28,15 +27,13 @@ red.addEventListener("click", function(){
 });
 
 function pleaseHelp() {
-    var dayNum = sessionStorage.getItem("dayCount")++;
-    sessionStorage.setItem("dayCount", "dayNum");
     switchScreen = true;
     setTimeout(function(){
         black.style["background-color"] = "red";
     }, 7000);
     setTimeout(function(){
         black.style["background-color"] = "black";
-    }, 9000);
+    }, 8000);
     setTimeout(function(){
         var changeTexts = document.querySelectorAll("#hidden-text h3");
         var replaceText = ["zoned out", "do you have a lot of thoughts?",
@@ -48,7 +45,7 @@ function pleaseHelp() {
             a.innerHTML = replaceText[x];
             x++
         });
-    }, 8000);
+    }, 7500);
 }
 
 function grow(x) {
