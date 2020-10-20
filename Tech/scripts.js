@@ -2,11 +2,13 @@ var eyes = document.getElementById("eyes");
 var me = document.getElementById("me");
 var me_hover = document.getElementById("me-hover");
 var mouseMove = document.querySelector(".container");
+var cc = document.getElementById("cc");
 
 me.addEventListener("mouseover", function(){
     me.classList.add("hide")
     me_hover.classList.remove("hide")
     me_hover.style.cursor = "pointer"
+    cc.classList.remove("hide");
 });
 
 me_hover.addEventListener("mouseout", function(){
